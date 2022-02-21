@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Database Record</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Product info</h1>
+      <a href="/add-product" class="btn btn-primary">Add-Product</a>
+      <br />
+      <% if(message.length>0) {%>
+      <div class="alert alert-success"><%= message%></div>
+      <%}%>
+      <br />
+      <br />
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Size</th>
+            <th>Product Price</th>
+            <th>Product Image</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <%if(viewdata.length>0) {%>
+        <tbody>
+          <% for(let data of viewdata) {if(data.status!=0) {%>
+          <tr>
+            <td><%= data.name%></td>
+            <td><%= data.size%></td>
+            <td><%= data.price%></td>
+            <td><img src="<%= data.image%>" height="100px" width="100px" /></td>
+            <td>
+              <a href="/edit/<%= data._id%>" class="btn btn-info">Edit</a>
+            </td>
+            <td>
+              <a href="/delete/<%= data._id%>" class="btn btn-danger">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+        <%}} } else{%>
+        <h2>Database Empty.No data found</h2>
+        <%}%>
+      </table>
+    </div>
+  </body>
+</html>
